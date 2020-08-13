@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {View, Text, StyleSheet} from 'react-native';
+import {StyleSheet, Button} from 'react-native';
+import {View, Text} from 'react-native-ui-lib';
 import {Navigation} from 'react-native-navigation';
 import * as postsActions from '../posts.actions';
 
@@ -35,14 +36,27 @@ class ViewPost extends Component {
   }
 
   onPostDeletePressed() {
-    postsActions.deletePost(this.props.id);
+    Navigation.pop(this.props.componentId);
+    postsActions.deletePost(this.props.post.id);
   }
 
   render() {
+    const {title, text} = this.props.post;
     return (
-      <View style={styles.container}>
-        <Text style={styles.text}>View Screen</Text>
-        {/* <Text>{JSON.stringify(this.props.post)}</Text> */}
+      <View flex spread padding-24>
+        <View>
+          <Text text30 purple10>
+            {title}
+          </Text>
+          <Text text70 dark20 marginT-12>
+            {text}
+          </Text>
+        </View>
+        <Button
+          title="Delete Post"
+          onPress={this.onPostDeletePressed}
+          color={'red'}
+        />
       </View>
     );
   }

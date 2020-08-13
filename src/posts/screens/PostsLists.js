@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {View, Text, StyleSheet, FlatList} from 'react-native';
+import {StyleSheet, FlatList} from 'react-native';
+import {View, Text, Colors, Typography} from 'react-native-ui-lib';
 import {Navigation} from 'react-native-navigation';
 import {connect} from 'remx';
 import {postsStore} from '../posts.store';
@@ -77,13 +78,15 @@ class PostsList extends Component {
   };
 
   renderItem = ({item}) => {
-    <Text onPress={() => this.pushViewPostScreen(item)}>{item.title}</Text>;
+    return (
+      <Text onPress={() => this.pushViewPostScreen(item)}>{item.title}</Text>
+    );
   };
 
   postKeyExtractor = (item) => `${item.id}-key`;
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.list}>
         <Text style={styles.text} onPress={this.pushViewPostScreen}>
           PostsLists Screen
         </Text>
@@ -92,7 +95,6 @@ class PostsList extends Component {
           keyExtractor={this.postKeyExtractor}
           renderItem={this.renderItem}
         />
-        {/* <Text>{JSON.stringify(this.props.posts)}</Text> */}
       </View>
     );
   }
@@ -116,5 +118,11 @@ const styles = StyleSheet.create({
     fontSize: 28,
     textAlign: 'center',
     margin: 10,
+  },
+  title: {
+    ...Typography.text40,
+    color: Colors.purple10,
+    textAlign: 'center',
+    marginTop: 23,
   },
 });

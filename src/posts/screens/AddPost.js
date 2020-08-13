@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {View, Text, TextInput, StyleSheet} from 'react-native';
+import {TextInput, StyleSheet} from 'react-native';
+import {View, TextField} from 'react-native-ui-lib';
 import PropTypes from 'prop-types';
 import {Navigation} from 'react-native-navigation';
 import * as postsActions from '../posts.actions';
@@ -69,6 +70,7 @@ class AddPost extends Component {
 
   onChangeTitle(title) {
     this.setState({title: title});
+    console.log(this.state.title);
     Navigation.mergeOptions(this.props.componentId, {
       topBar: {
         rightButtons: [
@@ -85,16 +87,20 @@ class AddPost extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>AddPost Screen</Text>
-        <TextInput
+        <TextField
+          text70
+          containerStyle={{marginBottom: 12}}
+          floatingPlaceholder
           placeholder="Add a Catchy Title"
-          value={this.state.title}
           onChangeText={this.onChangeTitle}
+          floatOnFocus
         />
-        <TextInput
+        <TextField
+          text70
+          floatingPlaceholder
           placeholder="This is the beginning of a great post"
-          value={this.state.text}
           onChangeText={this.onChangeText}
+          expandable
         />
       </View>
     );
